@@ -1,0 +1,270 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Bereken de kosten voor het printen!</title>
+        <meta name="description" content="Print price calculator">
+        <link rel="stylesheet" href="style.css">
+        </head>
+    <body><h1>Bereken de kosten</h1>
+<table>
+  <!-- Ask the user to enter the amount of pages -->
+  <tr>
+    <td>
+      <p>Aantal pagina's:</p>
+    </td>
+    <td>
+      <p>
+        <input type="number" min="1" id="amountOfPagesInput">
+      </p>
+    </td>
+    <td>
+      <p id="amountOfPagesResults"></p>
+    </td>
+    <td></td>
+  </tr>
+  <!-- Ask the user to enter the amount of sets -->
+  <tr>
+    <td>
+      <p>Aantal sets:</p>
+    </td>
+    <td>
+      <p>
+        <input type="number" min="1" id="amountOfSetsInput">
+      </p>
+    </td>
+    <td>
+      <p id="amountOfSetsResults"></p>
+    </td>
+    <td></td>
+  </tr>
+  <!-- Ask user for color of the print / standard selected is color -->
+  <tr>
+    <td>
+      <p>Kleur van afdruk: </p>
+    </td>
+    <td>
+      <p>
+        <input type="radio" value="kleur" name="pickYourColor" id="color" checked="true"> Kleur
+        <br/>
+        <input type="radio" value="zwart-wit" name="pickYourColor" id="blackAndWhite"> Zwart-Wit
+      </p>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <!-- Ask the user if he wants single or double sided prints / standard selected is single sided -->
+  <tr>
+    <td>
+      <p>Enkel of dubbelzijdig: </p>
+    </td>
+    <td>
+      <p>
+        <input type="radio" value="0" name="singleOrDoubleSided" id="singleSided" checked="true"> Enkelzijdig
+        <br/>
+        <input type="radio" value="1" name="singleOrDoubleSided" id="doubleSided"> Dubbelzijdig
+      </p>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <!-- Ask the user which paperweight he wants -->
+  <tr>
+    <td>
+      <p>Papierdikte: </p>
+    </td>
+    <td>
+      <p>
+        <select id="paperWeight">
+          <option value="80" id="80gr">Standaard papier</option>
+          <option value="120" id="120gr">120 grams</option>
+          <option value="160" id="160gr">160 grams</option>
+          <option value="190" id="190gr">190 grams</option>
+          <option value="210" id="210gr">210 grams</option>
+          <option value="250" id="250gr">250 grams</option>
+          <option value="280" id="280gr">280 grams</option>
+          <option value="300" id="300gr">300 grams</option>
+          <option value="350" id="350gr">350 grams</option>
+        </select>
+      </p>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <!-- Specifing the binding -->
+  <tr id="makingBinding">
+    <td>
+      <p>Inbinden: </p>
+    </td>
+    <td>
+      <p>
+        <select id="binding">
+          <option value="0" id="none">-- Niet inbinden --</option>
+          <option value="1" id="wire-o">Wire-O ringband</option>
+          <option value="2" id="thermo">Thermo lijmstrip</option>
+        </select>
+      </p>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="makingStaples">
+    <td>
+      <p>Nieten: </p>
+    </td>
+    <td>
+      <p>
+        <select id="stapling">
+          <option value="0" id="none">-- Niet nieten --</option>
+          <option value="1" id="1left">1 nietje links</option>
+          <option value="2" id="1right">1 nietje rechts</option>
+          <option value="3" id="1left">2 nietjes links</option>
+          <option value="4" id="foldAndStaple">vouwen + nieten</option>
+        </select>
+      </p>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="makingHoles">
+    <td>
+      <p>Perforeren: </p>
+    </td>
+    <td>
+      <p>
+        <select id="holes">
+          <option value="0" id="none">-- Niet perforeren --</option>
+          <option value="1" id="2holes">2 gaten</option>
+          <option value="2" id="4holes">4 gaten</option>
+        </select>
+        <p>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+<input type="button" id="calculate" value="Berekenen">
+<hr/>
+<!-- Start calculation -->
+<table id="calculation">
+  <tr>
+    <td>
+      <h2>Uw Offerte:</h2></td>
+  </tr>
+  <!-- Show the amount of pages -->
+  <tr>
+    <td>
+      <p>Totaal aantal pagina's:</p>
+    </td>
+    <td>
+      <p id="totalAmountOfPagesResults"></p>
+    </td>
+    <!-- Show the total price -->
+    <td>
+      <p>Prijs per zijde:</p>
+    </td>
+    <td>
+      <p id="pricePerPageResults"></p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>Kleur of Zwart-wit:</p>
+    </td>
+    <td>
+      <p id="colorResults"></p>
+    </td>
+    <td>
+      <p>Totaal voor printen: </p>
+    </td>
+    <td>
+      <p id="totalPricePrints"></p>
+    </td>
+  </tr>
+  <!-- Show the price for paper weight -->
+  <tr>
+    <td>
+      <p>Papierdikte: </p>
+    </td>
+    <td>
+      <p id="paperWeightResults"></p>
+    </td>
+    <!-- Show the total price -->
+    <td>
+      <p>Totaal voor papier: </p>
+    </td>
+    <td>
+      <p id="pricePaperWeightResults"></p>
+    </td>
+  </tr>
+  <!-- Show the chosen binding method -->
+  <tr>
+    <td>
+      <p>Inbindmethode: </p>
+    </td>
+    <td>
+      <p id="bindingMethod"></p>
+    </td>
+    <!-- Show the total price -->
+    <td>
+      <p>Totaal voor inbinden: </p>
+    </td>
+    <td>
+      <p id="bindingResults"></p>
+    </td>
+  </tr>
+  <!-- Show the chosen stapling method -->
+  <tr>
+    <td>
+      <p>Nietjes: </p>
+    </td>
+    <td>
+      <p id="staplingMethod"></p>
+    </td>
+    <!-- Show the total price -->
+    <td>
+      <p>Totaal voor nieten: </p>
+    </td>
+    <td>
+      <p id="staplingResults"></p>
+    </td>
+  </tr>
+  <!-- Show the chosen binding method -->
+  <tr>
+    <td>
+      <p>Perforatie: </p>
+    </td>
+    <td>
+      <p id="holesMethod"></p>
+    </td>
+    <!-- Show the total price -->
+    <td>
+      <p>Totaal voor perforeren: </p>
+    </td>
+    <td>
+      <p id="holesResults"></p>
+    </td>
+  </tr>
+  <!-- Show startup costs -->
+  <tr>
+    <td></td>
+    <td></td>
+    <td>
+      <p>Opstartkosten: </p>
+    </td>
+    <td>
+      <p>€ 2,95</p>
+    </td>
+  </tr>
+  <!-- Show the price per page -->
+  <tr>
+    <td></td>
+    <td></td>
+    <td>
+      <h3>Totaalprijs: </h3></td>
+    <td>
+      <h3 id="totalPrice"></h3></td>
+  </tr>
+</table>
+        <script src="calculation.js"></script>
+    </body></html>

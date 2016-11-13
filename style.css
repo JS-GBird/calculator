@@ -1,0 +1,30 @@
+#amountOfSetsResults,
+#amountOfPagesResults {
+  color: red;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+body,
+select,
+button {
+  font-family: "verdana";
+}
+
+p {
+  font-size: 10pt;
+  margin: 5px;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  width: 25%;
+}
