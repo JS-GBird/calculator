@@ -1,4 +1,4 @@
-<html>
+﻿<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,7 @@
     </td>
     <td>
       <p>
-        <input type="number" min="1" id="amountOfPagesInput">
+        <input type="number" id="amountOfPagesInput">
       </p>
     </td>
     <td>
@@ -30,7 +30,7 @@
     </td>
     <td>
       <p>
-        <input type="number" min="1" id="amountOfSetsInput">
+        <input type="number" id="amountOfSetsInput">
       </p>
     </td>
     <td>
@@ -63,6 +63,21 @@
         <input type="radio" value="0" name="singleOrDoubleSided" id="singleSided" checked="true"> Enkelzijdig
         <br/>
         <input type="radio" value="1" name="singleOrDoubleSided" id="doubleSided"> Dubbelzijdig
+      </p>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+   <!-- Ask the user if he wants A4 or A3 sized prints -->
+  <tr>
+    <td>
+      <p>Papierformaat: </p>
+    </td>
+    <td>
+      <p>
+        <input type="radio" value="0" name="paperSize" id="a4" checked="true"> A4
+        <br/>
+        <input type="radio" value="1" name="paperSize" id="a3"> A3
       </p>
     </td>
     <td></td>
@@ -181,6 +196,21 @@
       <p id="totalPricePrints"></p>
     </td>
   </tr>
+  <tr>
+    <td>
+      <p>Papierformaat: </p>
+    </td>
+    <td>
+      <p id="paperSizeResults"></p>
+    </td>
+    <!-- Show the total price -->
+    <td>
+      
+    </td>
+    <td>
+     
+    </td>
+  </tr>
   <!-- Show the price for paper weight -->
   <tr>
     <td>
@@ -266,5 +296,5 @@
       <h3 id="totalPrice"></h3></td>
   </tr>
 </table>
-        <script src="calculation.js"></script>
+        <script async src="calculation.js"></script>
     </body></html>
