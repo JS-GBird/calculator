@@ -1,3 +1,5 @@
+// Declaring all DOM references in an object -> to clean the code!
+
 var elems = {
   makingStaples: document.getElementById("makingStaples"),
   makingHoles: document.getElementById("makingHoles"),
