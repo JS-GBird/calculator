@@ -1,41 +1,42 @@
-$(document).ready(function() {
-    
-
 // Declaring all DOM references in an object -> to clean the code!
+
 var elems = {
-  makingStaples: $("#makingStaples"),
-  makingHoles: $("#makingHoles"),
-  makingBinding: $("#makingBinding"),
-  amountOfSetsResults: $("#amountOfSetsResults"),
-  amountOfPagesResults: $("#amountOfPagesResults"),
-  binding: $("#binding"),
-  stapling: $("#stapling"),
-  holes: $("#holes"),
-  paperWeight: $("#paperWeight"),
-  bindingResults: $("#bindingResults"),
-  holesResults: $("#holesResults"),
-  staplingResults: $("#staplingResults"),
-  totalAmountOfPagesResults: $("#totalAmountOfPagesResults"),
-  paperWeightResults: $("#paperWeightResults"),
-  bindingMethod: $("#bindingMethod"),
-  staplingMethod: $("#staplingMethod"),
-  holesMethod: $("#holesMethod"),
-  pricePaperWeightResults: $("#pricePaperWeightResults"),
-  blackAndWhite: $("#blackAndWhite"),
-  color: $("#color"),
-  colorResults: $("#colorResults"),
-  totalPricePrints: $("#totalPricePrints"),
-  totalPrice: $("#totalPrice"),
-  pricePerPageResults: $("#pricePerPageResults"),
-  calculation: $("#calculation"),
-  calculate: $("#calculate"),
-  amountOfSetsInput: $("#amountOfSetsInput"),
-  amountOfPagesInput: $("#amountOfPagesInput"),
-  singleSided: $("#singleSided"),
-  doubleSided: $("#doubleSided"),
-  a4Size: $("#a4"),
-  a3Size: $("#a3"),
-  paperSizeResults: $("#paperSizeResults")
+  makingStaples: document.getElementById("makingStaples"),
+  makingHoles: document.getElementById("makingHoles"),
+  makingBinding: document.getElementById("makingBinding"),
+  amountOfSetsResults: document.getElementById("amountOfSetsResults"),
+  amountOfPagesResults: document.getElementById("amountOfPagesResults"),
+  binding: document.getElementById("binding"),
+  stapling: document.getElementById("stapling"),
+  holes: document.getElementById("holes"),
+  paperWeight: document.getElementById("paperWeight"),
+  bindingResults: document.getElementById("bindingResults"),
+  holesResults: document.getElementById("holesResults"),
+  staplingResults: document.getElementById("staplingResults"),
+  totalAmountOfPagesResults: document.getElementById("totalAmountOfPagesResults"),
+  paperWeightResults: document.getElementById("paperWeightResults"),
+  bindingMethod: document.getElementById("bindingMethod"),
+  staplingMethod: document.getElementById("staplingMethod"),
+  holesMethod: document.getElementById("holesMethod"),
+  pricePaperWeightResults: document.getElementById("pricePaperWeightResults"),
+  blackAndWhite: document.getElementById("blackAndWhite"),
+  color: document.getElementById("color"),
+  colorResults: document.getElementById("colorResults"),
+  totalPricePrints: document.getElementById("totalPricePrints"),
+  totalPrice: document.getElementById("totalPrice"),
+  pricePerPageResults: document.getElementById("pricePerPageResults"),
+  calculation: document.getElementById("calculation"),
+  calculate: document.getElementById("calculate"),
+  amountOfSetsInput: document.getElementById("amountOfSetsInput"),
+  amountOfPagesInput: document.getElementById("amountOfPagesInput"),
+  singleSided: document.getElementById("singleSided"),
+  doubleSided: document.getElementById("doubleSided"),
+  a4Size: document.getElementById("a4"),
+  a3Size: document.getElementById("a3"),
+  paperSizeResults: document.getElementById("paperSizeResults"),
+  buttonReset: document.getElementById("buttonReset"),
+  calculatePrice: document.getElementById("calculatePrice")
+
 }
 
 // Hiding calculations from page
@@ -68,15 +69,19 @@ var priceListBlackAndWhite = {
 
 // Defining the pricelist for paperweight
 var priceListPaperWeight = {
-  80: 0,
-  120: 0.05,
-  160: 0.1,
-  190: 0.15,
-  210: 0.2,
-  250: 0.25,
-  280: 0.3,
-  300: 0.35,
-  350: 0.4
+  0: 0,
+  1: 0.05,
+  2: 0.1,
+  3: 0.15,
+  4: 0.2,
+  5: 0.25,
+  6: 0.3,
+  7: 0.35,
+  8: 0.4,
+  9: 0.3,
+  10: 0.5,
+  11: 0.7,
+  12: 0.9
 }
 
 // Defining the pricelist for binding
@@ -102,10 +107,20 @@ var priceListHoles = {
   500: 0.08
 }
 
+// Reseting all values
+function fullReset (){
+	elems.calculatePrice.reset();
+	toggleVisibility(elems.calculation, true);
+	elems.makingBinding.style.display = "";
+	elems.makingHoles.style.display = "";
+	elems.makingStaples.style.display = "";
+}
+
+
 // Getting the value for the amount of pages given in by user
 function finalAmountOfPages() {
-  var totalAmountOfSets = elems.amountOfSetsInput.val() || 0;
-  var totalAmountOfPages = elems.amountOfPagesInput.val() || 0;
+  var totalAmountOfSets = elems.amountOfSetsInput.value || 0;
+  var totalAmountOfPages = elems.amountOfPagesInput.value || 0;
 
   // Validation process, returns true or false; if true we proceed
   if (validateForm(totalAmountOfSets, totalAmountOfPages)) {
@@ -154,7 +169,8 @@ function finalAmountOfPages() {
 
 // Function to hide or show elements on the page
 function toggleVisibility(selector, hide) {
-  hide ? selector.hide() : selector.show();
+  var showStyle = hide ? "none" : "";
+  selector.style.display = showStyle;
 }
 
 // Defining a function to hide specific elements
@@ -177,14 +193,14 @@ function showCalculation() {
 
 // Defining a function to validate all fields
 function validateForm(totalAmountOfSets, totalAmountOfPages) {
-  elems.amountOfSetsResults.html("");
-  elems.amountOfPagesResults.html("");
+  elems.amountOfSetsResults.innerHTML = "";
+  elems.amountOfPagesResults.innerHTML = "";
   // Validating the input fields
   if (!totalAmountOfPages || isNaN(totalAmountOfPages) || totalAmountOfPages <= 0) {
-    elems.amountOfPagesResults.html("Controleer uw invoer!");
+    elems.amountOfPagesResults.innerHTML = "Controleer uw invoer!";
     return false; //validation not passed
   } else if (!totalAmountOfSets || isNaN(totalAmountOfSets) || totalAmountOfSets <= 0) {
-    elems.amountOfSetsResults.html("Controleer uw invoer!");
+    elems.amountOfSetsResults.innerHTML = "Controleer uw invoer!";
     return false; //validation not passed
   } else {
     return true; //validation passed
@@ -204,12 +220,12 @@ function getPricePerPage(priceList, finalPagesAmount, initialNumber) {
 
 // Get the values from the select elements
 function getValue(selector) {
-  return parseInt(selector.val());
+  return parseInt(selector.options[selector.selectedIndex].value);
 };
 
 // Get the text from the select elements
 function getText(selector) {
-  return selector.find("option:selected").text();
+  return selector.options[selector.selectedIndex].text;
 };
 
 // Get prices for finishing options
@@ -241,19 +257,19 @@ function findPaperWeightPrice(paperWeight, initialNumber) {
 // Get total price
 function getTotalPrice (amount) {
 	var totalPrice = amount.totalBindingPrice + amount.totalStaplePrice + amount.totalHolesPrice + amount.startUpCosts;
-	if (elems.doubleSided.is(":checked") && elems.blackAndWhite.is(":checked") && elems.a4Size.is(":checked")) {
+	if (elems.doubleSided.checked && elems.blackAndWhite.checked && elems.a4Size.checked) {
   	totalPrice += amount.totalPriceBlackAndWhitePrinting + amount.totalPricePaperDoubleSided;
-  } else if (elems.doubleSided.is(":checked") && elems.color.is(":checked") && elems.a4Size.is(":checked")) {
+  } else if (elems.doubleSided.checked && elems.color.checked && elems.a4Size.checked) {
   	totalPrice += amount.totalPriceColorPrinting + amount.totalPricePaperDoubleSided;
-  } else if (elems.singleSided.is(":checked") && elems.blackAndWhite.is(":checked") && elems.a4Size.is(":checked")) {
+  } else if (elems.singleSided.checked && elems.blackAndWhite.checked && elems.a4Size.checked) {
   	totalPrice += amount.totalPriceBlackAndWhitePrinting + amount.totalPricePaper;
-  } else if (elems.singleSided.is(":checked") && elems.color.is(":checked") && elems.a4Size.is(":checked")) {
+  } else if (elems.singleSided.checked && elems.color.checked && elems.a4Size.checked) {
   	totalPrice += amount.totalPriceColorPrinting + amount.totalPricePaper;
-  } else if (elems.doubleSided.is(":checked") && elems.blackAndWhite.is(":checked") && elems.a3Size.is(":checked")) {
+  } else if (elems.doubleSided.checked && elems.blackAndWhite.checked && elems.a3Size.checked) {
   	totalPrice += (amount.totalPriceBlackAndWhitePrinting + amount.totalPricePaperDoubleSided) * 2;
-  } else if (elems.doubleSided.is(":checked") && elems.color.is(":checked") && elems.a3Size.is(":checked")) {
+  } else if (elems.doubleSided.checked && elems.color.checked && elems.a3Size.checked) {
   	totalPrice += (amount.totalPriceColorPrinting + amount.totalPricePaperDoubleSided) * 2;
-  } else if (elems.singleSided.is(":checked") && elems.blackAndWhite.is(":checked") && elems.a3Size.is(":checked")) {
+  } else if (elems.singleSided.checked && elems.blackAndWhite.checked && elems.a3Size.checked) {
   	totalPrice += (amount.totalPriceBlackAndWhitePrinting + amount.totalPricePaper) * 2;
   } else {
   	totalPrice += (amount.totalPriceColorPrinting + amount.totalPricePaper) * 2;
@@ -263,56 +279,55 @@ function getTotalPrice (amount) {
 
 // Update the price
 function updateView(amount) {
-  elems.bindingResults.html("\u20ac " + amount.totalBindingPrice.toFixed(2));
-  elems.holesResults.html("\u20ac " + amount.totalHolesPrice.toFixed(2));
-  elems.staplingResults.html("\u20ac " + amount.totalStaplePrice.toFixed(2));
-  elems.totalAmountOfPagesResults.html(amount.totalAmountOfSets * amount.totalAmountOfPages);
-  elems.paperWeightResults.html(getText(elems.paperWeight));
-  elems.bindingMethod.html(getText(elems.binding));
-  elems.staplingMethod.html(getText(elems.stapling));
-  elems.holesMethod.html(getText(elems.holes));
-  elems.totalPrice.html("\u20ac " + getTotalPrice(amount));
-  if (elems.doubleSided.is(":checked") && elems.a4Size.is(":checked")) {
-    elems.pricePaperWeightResults.html("\u20ac " + amount.totalPricePaperDoubleSided.toFixed(2));
-  } else if (elems.doubleSided.is(":checked") && elems.a3Size.is(":checked")) {
-    elems.pricePaperWeightResults.html("\u20ac " + amount.totalPricePaper.toFixed(2));
-	} else if (elems.singleSided.is(":checked") && elems.a3Size.is(":checked")) {
-  	elems.pricePaperWeightResults.html("\u20ac " + (2 * amount.totalPricePaper).toFixed(2));
+  elems.bindingResults.innerHTML = "\u20ac " + amount.totalBindingPrice.toFixed(2);
+  elems.holesResults.innerHTML = "\u20ac " + amount.totalHolesPrice.toFixed(2);
+  elems.staplingResults.innerHTML = "\u20ac " + amount.totalStaplePrice.toFixed(2);
+  elems.totalAmountOfPagesResults.innerHTML = amount.totalAmountOfSets * amount.totalAmountOfPages;
+  elems.paperWeightResults.innerHTML = getText(elems.paperWeight);
+  elems.bindingMethod.innerHTML = getText(elems.binding);
+  elems.staplingMethod.innerHTML = getText(elems.stapling);
+  elems.holesMethod.innerHTML = getText(elems.holes);
+  elems.totalPrice.innerHTML = "\u20ac " + getTotalPrice(amount);
+  if (elems.doubleSided.checked && elems.a4Size.checked) {
+    elems.pricePaperWeightResults.innerHTML = "\u20ac " + amount.totalPricePaperDoubleSided.toFixed(2);
+  } else if (elems.doubleSided.checked && elems.a3Size.checked) {
+    elems.pricePaperWeightResults.innerHTML = "\u20ac " + amount.totalPricePaper.toFixed(2);
+	} else if (elems.singleSided.checked && elems.a3Size.checked) {
+  	elems.pricePaperWeightResults.innerHTML = "\u20ac " + (2 * amount.totalPricePaper).toFixed(2);
   } else {
-    elems.pricePaperWeightResults.html("\u20ac " + amount.totalPricePaper.toFixed(2));
+    elems.pricePaperWeightResults.innerHTML = "\u20ac " + amount.totalPricePaper.toFixed(2);
   }
   // Show Black and White total print price and price per page
-  if (elems.blackAndWhite.is(":checked") && elems.a4Size.is(":checked")) {
-    elems.colorResults.html("Zwart-Wit");
-    elems.paperSizeResults.html("A4");
-    elems.totalPricePrints.html("\u20ac " + amount.totalPriceBlackAndWhitePrinting.toFixed(2));
-    elems.pricePerPageResults.html("\u20ac " + amount.pricePerBlackAndWhitePage.toFixed(2));
-  } else if (elems.blackAndWhite.is(":checked") && elems.a3Size.is(":checked")) {
-  	elems.colorResults.html("Zwart-Wit");
-    elems.paperSizeResults.html("A3");
-    elems.totalPricePrints.html("\u20ac " + (2 * amount.totalPriceBlackAndWhitePrinting).toFixed(2));
-    elems.pricePerPageResults.html("\u20ac " + (2 * amount.pricePerBlackAndWhitePage).toFixed(2));
+  if (elems.blackAndWhite.checked && elems.a4Size.checked) {
+    elems.colorResults.innerHTML = "Zwart-Wit"
+    elems.paperSizeResults.innerHTML = "A4"
+    elems.totalPricePrints.innerHTML = "\u20ac " + amount.totalPriceBlackAndWhitePrinting.toFixed(2);
+    elems.pricePerPageResults.innerHTML = "\u20ac " + amount.pricePerBlackAndWhitePage.toFixed(2);
+  } else if (elems.blackAndWhite.checked && elems.a3Size.checked) {
+  	elems.colorResults.innerHTML = "Zwart-Wit"
+    elems.paperSizeResults.innerHTML = "A3"
+    elems.totalPricePrints.innerHTML = "\u20ac " + (2 * amount.totalPriceBlackAndWhitePrinting).toFixed(2);
+    elems.pricePerPageResults.innerHTML = "\u20ac " + (2 * amount.pricePerBlackAndWhitePage).toFixed(2);
   }
   // OR show the color total print price and price per page
-  else if (elems.color.is(":checked") && elems.a3Size.is(":checked")) {
-    elems.colorResults.html("Kleur");
-    elems.paperSizeResults.html("A3");
-    elems.totalPricePrints.html("\u20ac " + (2 * amount.totalPriceColorPrinting).toFixed(2));
-    elems.pricePerPageResults.html("\u20ac " + (2 * amount.pricePerColorPage).toFixed(2));
+  else if (elems.color.checked && elems.a3Size.checked) {
+    elems.colorResults.innerHTML = "Kleur"
+    elems.paperSizeResults.innerHTML = "A3"
+    elems.totalPricePrints.innerHTML = "\u20ac " + (2 * amount.totalPriceColorPrinting).toFixed(2);
+    elems.pricePerPageResults.innerHTML = "\u20ac " + (2 * amount.pricePerColorPage).toFixed(2);
   } else {
-    elems.colorResults.html("Kleur");
-    elems.paperSizeResults.html("A4");
-    elems.totalPricePrints.html("\u20ac " + amount.totalPriceColorPrinting.toFixed(2));
-    elems.pricePerPageResults.html("\u20ac " + amount.pricePerColorPage.toFixed(2));
+    elems.colorResults.innerHTML = "Kleur"
+    elems.paperSizeResults.innerHTML = "A4"
+    elems.totalPricePrints.innerHTML = "\u20ac " + amount.totalPriceColorPrinting.toFixed(2);
+    elems.pricePerPageResults.innerHTML = "\u20ac " + amount.pricePerColorPage.toFixed(2);
   }
 }
 
 // Defining an Event Listener with an on click function
-elems.calculate.on("click", finalAmountOfPages);
+elems.calculate.addEventListener("click", finalAmountOfPages);
+elems.buttonReset.addEventListener("click", fullReset);
 
 // Defining the onChange Event Listeners to hide or show 'makingHoles', 'makingStaples' and 'makingBinding'
-elems.stapling.on("change", toggleSelect(elems.stapling, elems.makingBinding, elems.makingHoles));
-elems.binding.on("change", toggleSelect(elems.binding, elems.makingStaples, elems.makingHoles));
-elems.holes.on("change", toggleSelect(elems.holes, elems.makingBinding, elems.makingStaples));
-
-});
+elems.stapling.addEventListener("change", toggleSelect(elems.stapling, elems.makingBinding, elems.makingHoles));
+elems.binding.addEventListener("change", toggleSelect(elems.binding, elems.makingStaples, elems.makingHoles));
+elems.holes.addEventListener("change", toggleSelect(elems.holes, elems.makingBinding, elems.makingStaples));
