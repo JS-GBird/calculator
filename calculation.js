@@ -33,7 +33,10 @@ var elems = {
   doubleSided: document.getElementById("doubleSided"),
   a4Size: document.getElementById("a4"),
   a3Size: document.getElementById("a3"),
-  paperSizeResults: document.getElementById("paperSizeResults")
+  paperSizeResults: document.getElementById("paperSizeResults"),
+  buttonReset: document.getElementById("buttonReset"),
+  calculatePrice: document.getElementById("calculatePrice")
+
 }
 
 // Hiding calculations from page
@@ -66,15 +69,19 @@ var priceListBlackAndWhite = {
 
 // Defining the pricelist for paperweight
 var priceListPaperWeight = {
-  80: 0,
-  120: 0.05,
-  160: 0.1,
-  190: 0.15,
-  210: 0.2,
-  250: 0.25,
-  280: 0.3,
-  300: 0.35,
-  350: 0.4
+  0: 0,
+  1: 0.05,
+  2: 0.1,
+  3: 0.15,
+  4: 0.2,
+  5: 0.25,
+  6: 0.3,
+  7: 0.35,
+  8: 0.4,
+  9: 0.3,
+  10: 0.5,
+  11: 0.7,
+  12: 0.9
 }
 
 // Defining the pricelist for binding
@@ -99,6 +106,16 @@ var priceListHoles = {
   250: 0.10,
   500: 0.08
 }
+
+// Reseting all values
+function fullReset (){
+	elems.calculatePrice.reset();
+	toggleVisibility(elems.calculation, true);
+	elems.makingBinding.style.display = "";
+	elems.makingHoles.style.display = "";
+	elems.makingStaples.style.display = "";
+}
+
 
 // Getting the value for the amount of pages given in by user
 function finalAmountOfPages() {
@@ -308,6 +325,7 @@ function updateView(amount) {
 
 // Defining an Event Listener with an on click function
 elems.calculate.addEventListener("click", finalAmountOfPages);
+elems.buttonReset.addEventListener("click", fullReset);
 
 // Defining the onChange Event Listeners to hide or show 'makingHoles', 'makingStaples' and 'makingBinding'
 elems.stapling.addEventListener("change", toggleSelect(elems.stapling, elems.makingBinding, elems.makingHoles));
